@@ -21,10 +21,16 @@ cloudinary.v2.config({
 });
 
 const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : "";
+console.log("Environment FRONTEND_URL:", process.env.FRONTEND_URL);
+console.log("Normalized FRONTEND_URL:", frontendUrl);
 
 app.use(
   cors({
-    origin: [frontendUrl, `${frontendUrl}/`],
+    origin: [
+      frontendUrl,
+      "https://job-cloud-6h8b.vercel.app",
+      "https://job-cloud-6h8b.vercel.app/"
+    ],
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
