@@ -3,7 +3,9 @@ import { Job } from "../models/jobSchema.js";
 import ErrorHandler from "../middlewares/error.js";
 
 export const getAllJobs = catchAsyncErrors(async (req, res, next) => {
+  console.log("Fetching all jobs from database...");
   const jobs = await Job.find({ expired: false });
+  console.log(`Found ${jobs.length} jobs.`);
   res.status(200).json({
     success: true,
     jobs,
