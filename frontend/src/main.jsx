@@ -26,12 +26,14 @@ const AppWrapper = () => {
       if (isLoaded && isSignedIn && clerkUser) {
         try {
           const userEmail = clerkUser.primaryEmailAddress?.emailAddress;
-          console.log("Clerk User Email:", userEmail);
-          console.log("Env ADMIN_EMAIL:", ADMIN_EMAIL);
+          const normalizedUserEmail = userEmail?.trim().toLowerCase();
+          const normalizedAdminEmail = ADMIN_EMAIL?.trim().toLowerCase();
 
-          const role = userEmail?.toLowerCase() === ADMIN_EMAIL?.toLowerCase() ? "Employer" : "Job Seeker";
+          console.log(`Comparing: "${normalizedUserEmail}" with admin: "${normalizedAdminEmail}"`);
 
-          console.log(`Syncing user: ${userEmail}, assigned role: ${role}`);
+          const role = normalizedUserEmail === normalizedAdminEmail ? "Employer" : "Job Seeker";
+
+          console.log(`Assigned role: ${role}`);
 
           const response = await axios.post(
             `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/user/clerk-sync`,
