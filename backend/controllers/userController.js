@@ -80,9 +80,14 @@ export const clerkSync = catchAsyncErrors(async (req, res, next) => {
       name: name || "Clerk User",
       email,
       phone: phone || 0,
-      password: "CLERK_USER_PASSWORD_BYPASS", // This password won't be used since clerk handles auth
+      password: "CLERK_USER_PASSWORD_BYPASS",
       role,
     });
+  } else if (user.role !== role) {
+    // Update role if it has changed (important for admin promotion)
+    user.role = role;
+    await user.save();
+    console.log(`Updated role for user ${email} to ${role}`);
   }
 
   sendToken(user, 200, res, "Clerk Synced Successfully!");
