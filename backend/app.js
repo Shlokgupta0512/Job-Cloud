@@ -20,9 +20,11 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_CLIENT_SECRET,
 });
 
+const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : "";
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL],
+    origin: [frontendUrl, `${frontendUrl}/`],
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
