@@ -55,7 +55,7 @@ const PostJob = () => {
 
     await axios
       .post(
-        "http://localhost:4000/api/v1/job/post",
+        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/job/post`,
         payload,
         {
           withCredentials: true,

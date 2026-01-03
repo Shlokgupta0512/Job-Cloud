@@ -50,7 +50,7 @@ const Application = ({ jobId: propJobId }) => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
+        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/application/post`,
         formData,
         {
           withCredentials: true,

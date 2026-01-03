@@ -15,7 +15,7 @@ const Jobs = () => {
   useEffect(() => {
     try {
       axios
-        .get("http://localhost:4000/api/v1/job/getall", {
+        .get(`${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/job/getall`, {
           withCredentials: true,
         })
         .then((res) => {

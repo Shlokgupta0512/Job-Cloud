@@ -29,7 +29,7 @@ const AppWrapper = () => {
           const role = userEmail === ADMIN_EMAIL ? "Employer" : "Job Seeker";
 
           const response = await axios.post(
-            "http://localhost:4000/api/v1/user/clerk-sync",
+            `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/user/clerk-sync`,
             {
               name: clerkUser.fullName || clerkUser.firstName,
               email: userEmail,
