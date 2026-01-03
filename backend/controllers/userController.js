@@ -72,23 +72,23 @@ export const clerkSync = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email and Role are required for sync.", 400));
   }
 
-  let user = await User.findOne({ email });
+  const user = await User.findOneAndUpdate(
+    { email },
+    {
+      $set: {
+        name: name || "Clerk User",
+        role: role,
+        // Only set password and phone if creating new user
+      },
+      $setOnInsert: {
+        phone: phone || 0,
+        password: "CLERK_USER_PASSWORD_BYPASS",
+      }
+    },
+    { new: true, upsert: true, runValidators: false }
+  );
 
-  if (!user) {
-    // Create user if they don't exist
-    user = await User.create({
-      name: name || "Clerk User",
-      email,
-      phone: phone || 0,
-      password: "CLERK_USER_PASSWORD_BYPASS",
-      role,
-    });
-  } else if (user.role !== role) {
-    // Update role if it has changed (important for admin promotion)
-    user.role = role;
-    await user.save();
-    console.log(`Updated role for user ${email} to ${role}`);
-  }
+  console.log(`User synced: ${user.email}, Role: ${user.role}`);
 
   sendToken(user, 200, res, "Clerk Synced Successfully!");
 });
