@@ -38,6 +38,14 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Welcome to Job Cloud API! Backend is running perfectly.",
+  });
+});
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/job", jobRouter);
 app.use("/api/v1/application", applicationRouter);
