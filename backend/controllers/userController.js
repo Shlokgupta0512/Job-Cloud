@@ -72,13 +72,21 @@ export const clerkSync = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email and Role are required for sync.", 400));
   }
 
+  // Determine role based on admin email (server-side authority)
+  const adminEmail = process.env.VITE_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+  let finalRole = role;
+
+  if (email && adminEmail && email.toLowerCase().trim() === adminEmail.toLowerCase().trim()) {
+    finalRole = "Employer";
+    console.log(`Backend: Recognized admin email ${email}. Forcing Employer role.`);
+  }
+
   const user = await User.findOneAndUpdate(
     { email },
     {
       $set: {
         name: name || "Clerk User",
-        role: role,
-        // Only set password and phone if creating new user
+        role: finalRole,
       },
       $setOnInsert: {
         phone: phone || 0,
@@ -88,7 +96,7 @@ export const clerkSync = catchAsyncErrors(async (req, res, next) => {
     { new: true, upsert: true, runValidators: false }
   );
 
-  console.log(`User synced: ${user.email}, Role: ${user.role}`);
+  console.log(`User synced: ${user.email}, Final Role: ${user.role}`);
 
   sendToken(user, 200, res, "Clerk Synced Successfully!");
 });

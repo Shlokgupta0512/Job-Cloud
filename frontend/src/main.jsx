@@ -50,7 +50,7 @@ const AppWrapper = () => {
           );
           console.log("Backend Sync Successful:", response.data);
           setIsAuthorized(true);
-          setUser({ ...response.data.user, role });
+          setUser(response.data.user);
         } catch (error) {
           console.error("Backend Sync Failed:", error);
           setIsAuthorized(false);
