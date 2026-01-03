@@ -1,0 +1,9 @@
+PORT=4000
+MONGO_URI=your_mongodb_connection_string
+FRONTEND_URL=https://your-frontend-url.vercel.app
+JWT_SECRET_KEY=your_secret_key
+JWT_EXPIRES=7d
+COOKIE_EXPIRE=5
+CLOUDINARY_CLIENT_NAME=your_cloudinary_name
+CLOUDINARY_CLIENT_API=your_cloudinary_api
+CLOUDINARY_CLIENT_SECRET=your_cloudinary_secret
