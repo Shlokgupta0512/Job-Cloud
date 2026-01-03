@@ -26,6 +26,9 @@ const AppWrapper = () => {
       if (isLoaded && isSignedIn && clerkUser) {
         try {
           const userEmail = clerkUser.primaryEmailAddress?.emailAddress;
+          console.log("Clerk User Email:", userEmail);
+          console.log("Env ADMIN_EMAIL:", ADMIN_EMAIL);
+
           const role = userEmail?.toLowerCase() === ADMIN_EMAIL?.toLowerCase() ? "Employer" : "Job Seeker";
 
           console.log(`Syncing user: ${userEmail}, assigned role: ${role}`);
