@@ -24,13 +24,23 @@ const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(
 console.log("Environment FRONTEND_URL:", process.env.FRONTEND_URL);
 console.log("Normalized FRONTEND_URL:", frontendUrl);
 
+const allowedOrigins = [
+  frontendUrl,
+  "https://job-cloud-6h8b.vercel.app",
+  "http://localhost:5173"
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: [
-      frontendUrl,
-      "https://job-cloud-6h8b.vercel.app",
-      "https://job-cloud-6h8b.vercel.app/"
-    ],
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".vercel.app")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     method: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
