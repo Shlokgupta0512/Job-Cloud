@@ -7,7 +7,7 @@ import { UserButton, SignInButton, useUser } from "@clerk/clerk-react";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { user } = useContext(Context);
-  const { user: clerkUser } = useUser();
+  const { user: clerkUser, isSignedIn } = useUser();
   const isAdminEmail = clerkUser?.primaryEmailAddress?.emailAddress === "shlokg166@gmail.com";
   const isEmployer = (user && user.role === "Employer") || isAdminEmail;
 
