@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { Context } from "../../main";
+import { Context } from "../../context/Context.jsx";
 import { Navigate } from "react-router-dom";
 import HeroSection from "./HeroSection";
 import HowItWorks from "./HowItWorks";

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Context } from "../../main";
+import { Context } from "../../context/Context.jsx";
 import Application from "../Application/Application";
 import { motion } from "framer-motion";
 import {

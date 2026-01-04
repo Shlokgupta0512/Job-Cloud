@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { Context } from "../../main";
+import { Context } from "../../context/Context.jsx";
 import { motion } from "framer-motion";
 import {
   MdPerson,

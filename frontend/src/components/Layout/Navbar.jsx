@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Context } from "../../main";
+import { Context } from "../../context/Context.jsx";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { UserButton, SignInButton, useUser } from "@clerk/clerk-react";
