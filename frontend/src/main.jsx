@@ -1,19 +1,16 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./App.css";
 import { ClerkProvider, useUser } from "@clerk/clerk-react";
 import axios from "axios";
+import { Context } from "./context/Context.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
-
-export const Context = createContext({
-  isAuthorized: false,
-});
 
 const AppWrapper = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
