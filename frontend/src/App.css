@@ -1598,41 +1598,350 @@ footer .container {
   font-weight: 600;
   cursor: pointer;
 }
+
 /* Premium My Jobs Page Styling */
-.my_jobs_page { background: #0f172a; min-height: 100vh; padding-bottom: 80px; }
-.my_jobs_page .page_hero { position: relative; width: 100%; height: 320px; overflow: hidden; margin-bottom: 60px; }
-.my_jobs_page .hero_bg { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
-.my_jobs_page .overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.4); z-index: 2; }
-.my_jobs_page .hero_content { text-align: center; color: #ffffff; }
-.my_jobs_page .hero_icon { font-size: 4rem; color: #d97706; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(217, 119, 6, 0.5)); }
-.my_jobs_page h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 12px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
-.my_jobs_page .hero_content p { font-size: 1.25rem; color: #cbd5e1; }
-.my_jobs_page .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
-.jobs_grid { display: flex; flex-direction: column; gap: 40px; }
-.job_card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 35px; transition: all 0.4s ease; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3); }
-.job_card:hover { transform: scale(1.01); border-color: #d97706; }
-.job_card.editing { border-color: #d97706; background: rgba(30, 41, 59, 0.9); box-shadow: 0 0 30px rgba(217, 119, 6, 0.2); }
-.job_card .card_header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 20px; }
-.title_wrapper { display: flex; align-items: center; gap: 15px; flex: 1; }
-.title_input { font-size: 1.8rem !important; font-weight: 800 !important; color: #ffffff !important; }
-.job_card .action_buttons { display: flex; gap: 12px; }
-.premium_input { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 10px 15px; color: #ffffff; font-size: 1rem; width: 100%; transition: 0.3s; }
-.premium_input:disabled { background: transparent; border-color: transparent; padding-left: 0; color: #cbd5e1; }
-.premium_input:focus:not(:disabled) { border-color: #d97706; box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2); outline: none; }
-.input_group { display: flex; flex-direction: column; gap: 8px; }
-.input_group label { color: #fbbf24; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
-.grid_fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 30px; }
-.salary_section { margin-bottom: 30px; padding: 20px; background: rgba(15, 23, 42, 0.4); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.03); }
-.salary_section label { color: #fbbf24; font-size: 0.9rem; font-weight: 700; margin-bottom: 15px; display: block; }
-.range_inputs { display: flex; align-items: center; gap: 15px; }
-.range_inputs span { color: #94a3b8; }
-.text_fields { display: grid; gap: 25px; }
-.text_fields textarea { resize: none; }
-.save_btn, .edit_btn { background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-.cancel_btn { background: rgba(255, 255, 255, 0.1); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-.job_card .delete_btn { background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-.job_card .delete_btn:hover { background: #ef4444; color: white; }
-.no_jobs { text-align: center; padding: 100px 20px; }
-.empty_icon { font-size: 5rem; color: #334155; margin-bottom: 20px; }
-.no_jobs p { color: #94a3b8; font-size: 1.2rem; margin-bottom: 30px; }
-.post_btn { background: #d97706; color: white; border: none; padding: 12px 30px; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 1.1rem; }
+.my_jobs_page {
+  background: #0f172a;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.my_jobs_page .page_hero {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+
+.my_jobs_page .hero_bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+.my_jobs_page .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.4);
+  z-index: 2;
+}
+
+.my_jobs_page .hero_content {
+  text-align: center;
+  color: #ffffff;
+}
+
+.my_jobs_page .hero_icon {
+  font-size: 4rem;
+  color: #d97706;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 15px rgba(217, 119, 6, 0.5));
+}
+
+.my_jobs_page h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.my_jobs_page .hero_content p {
+  font-size: 1.25rem;
+  color: #cbd5e1;
+}
+
+.my_jobs_page .container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.jobs_grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.job_card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 35px;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.job_card:hover {
+  transform: scale(1.01);
+  border-color: #d97706;
+}
+
+.job_card.editing {
+  border-color: #d97706;
+  background: rgba(30, 41, 59, 0.9);
+  box-shadow: 0 0 30px rgba(217, 119, 6, 0.2);
+}
+
+.job_card .card_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 20px;
+}
+
+.title_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.title_input {
+  font-size: 1.8rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+}
+
+.job_card .action_buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.premium_input {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: #ffffff;
+  font-size: 1rem;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.premium_input:disabled {
+  background: transparent;
+  border-color: transparent;
+  padding-left: 0;
+  color: #cbd5e1;
+}
+
+.premium_input:focus:not(:disabled) {
+  border-color: #d97706;
+  box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+  outline: none;
+}
+
+.input_group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input_group label {
+  color: #fbbf24;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.grid_fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.salary_section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.4);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.salary_section label {
+  color: #fbbf24;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.range_inputs {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.range_inputs span {
+  color: #94a3b8;
+}
+
+.text_fields {
+  display: grid;
+  gap: 25px;
+}
+
+.text_fields textarea {
+  resize: none;
+}
+
+.save_btn,
+.edit_btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel_btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.job_card .delete_btn {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.job_card .delete_btn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.no_jobs {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.empty_icon {
+  font-size: 5rem;
+  color: #334155;
+  margin-bottom: 20px;
+}
+
+.no_jobs p {
+  color: #94a3b8;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.post_btn {
+  background: #d97706;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* Role Selection */
+.role-selection-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+}
+
+.role-selection-container {
+  background: #1e293b;
+  padding: 50px;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 800px;
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.role-selection-container h2 {
+  color: var(--white);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.role-selection-container p {
+  color: #94a3b8;
+  margin-bottom: 40px;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.role-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--secondary);
+}
+
+.role-icon {
+  font-size: 4rem;
+  color: var(--secondary);
+  background: rgba(217, 119, 6, 0.1);
+  padding: 20px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.role-card h3 {
+  color: var(--white);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.role-card p {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}

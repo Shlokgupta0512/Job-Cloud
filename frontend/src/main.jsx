@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { ClerkProvider, useUser, useAuth } from "@clerk/clerk-react";
 import axios from "axios";
+import RoleSelection from "./components/Auth/RoleSelection";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
@@ -18,46 +19,68 @@ export const Context = createContext({
 const AppWrapper = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [user, setUser] = useState({});
+  const [showRoleSelection, setShowRoleSelection] = useState(false);
+
   const { user: clerkUser, isLoaded } = useUser();
   const { isSignedIn } = useAuth();
 
+  const syncUser = async (selectedRole) => {
+    if (!clerkUser) return;
+
+    const userEmail = clerkUser.primaryEmailAddress?.emailAddress;
+    const normalizedUserEmail = userEmail?.trim().toLowerCase();
+
+    // Auto-promote admin
+    const role = (normalizedUserEmail === "shlokg166@gmail.com") ? "Employer" : selectedRole;
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/clerk-sync`,
+        {
+          name: clerkUser.fullName || clerkUser.firstName,
+          email: userEmail,
+          role: role,
+        },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      console.log("Backend Sync Successful:", response.data);
+      setIsAuthorized(true);
+      setUser(response.data.user);
+      setShowRoleSelection(false);
+    } catch (error) {
+      console.error("Backend Sync Failed:", error);
+    }
+  };
+
   useEffect(() => {
-    const syncWithBackend = async () => {
+    const fetchUser = async () => {
       if (isLoaded && isSignedIn && clerkUser) {
         try {
-          const userEmail = clerkUser.primaryEmailAddress?.emailAddress;
-          const normalizedUserEmail = userEmail?.trim().toLowerCase();
-          const normalizedAdminEmail = ADMIN_EMAIL?.trim().toLowerCase();
-
-          console.log(`Comparing: "${normalizedUserEmail}" with admin: "${normalizedAdminEmail}"`);
-
-          const role = normalizedUserEmail === normalizedAdminEmail ? "Employer" : "Job Seeker";
-
-          console.log(`Assigned role: ${role}`);
-
-          const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/user/clerk-sync`,
-            {
-              name: clerkUser.fullName || clerkUser.firstName,
-              email: userEmail,
-              phone: clerkUser.phoneNumbers?.[0]?.phoneNumber || "0",
-              role: role,
-            },
-            {
-              withCredentials: true,
-              headers: { "Content-Type": "application/json" },
-            }
+          const { data } = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`,
+            { withCredentials: true }
           );
-          console.log("Backend Sync Successful:", response.data);
-          setIsAuthorized(true);
-          setUser(response.data.user);
+          if (data.user && data.user.role) {
+            setUser(data.user);
+            setIsAuthorized(true);
+            setShowRoleSelection(false);
+          } else {
+            setShowRoleSelection(true);
+          }
         } catch (error) {
-          console.error("Backend Sync Failed:", error);
-          setIsAuthorized(false);
+          // If not authorized or not found, show role selection
+          setShowRoleSelection(true);
         }
+      } else if (isLoaded && !isSignedIn) {
+        setIsAuthorized(false);
+        setUser({});
+        setShowRoleSelection(false);
       }
     };
-    syncWithBackend();
+    fetchUser();
   }, [isLoaded, isSignedIn, clerkUser]);
 
   return (
@@ -69,6 +92,7 @@ const AppWrapper = () => {
         setUser,
       }}
     >
+      {showRoleSelection && <RoleSelection onSelect={syncUser} />}
       <App />
     </Context.Provider>
   );

@@ -7,7 +7,9 @@ import { UserButton, SignInButton, useUser } from "@clerk/clerk-react";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const { user } = useContext(Context);
-  const { isSignedIn } = useUser();
+  const { user: clerkUser } = useUser();
+  const isAdminEmail = clerkUser?.primaryEmailAddress?.emailAddress === "shlokg166@gmail.com";
+  const isEmployer = (user && user.role === "Employer") || isAdminEmail;
 
   return (
     <nav className="navbarShow">
@@ -39,13 +41,13 @@ const Navbar = () => {
           {isSignedIn && (
             <li>
               <Link to={"/applications/me"} onClick={() => setShow(false)}>
-                {user && user.role === "Employer"
+                {isEmployer
                   ? "APPLICANT'S APPLICATIONS"
                   : "MY APPLICATIONS"}
               </Link>
             </li>
           )}
-          {isSignedIn && user && user.role === "Employer" ? (
+          {isSignedIn && isEmployer ? (
             <li className="dropdown-container">
               <span className="dropdown-trigger">EMPLOYER PANEL</span>
               <ul className="dropdown-menu">
