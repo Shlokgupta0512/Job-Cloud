@@ -28,6 +28,7 @@ const AppWrapper = () => {
 
   const syncUser = async (selectedRole) => {
     if (!clerkUser) return;
+    setLoading(true);
 
     const userEmail = clerkUser.primaryEmailAddress?.emailAddress;
     const normalizedUserEmail = userEmail?.trim().toLowerCase();
@@ -37,7 +38,7 @@ const AppWrapper = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/clerk-sync`,
+        `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/user/clerk-sync`,
         {
           name: clerkUser.fullName || clerkUser.firstName,
           email: userEmail,
@@ -54,6 +55,8 @@ const AppWrapper = () => {
       setShowRoleSelection(false);
     } catch (error) {
       console.error("Backend Sync Failed:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -62,7 +65,7 @@ const AppWrapper = () => {
       if (isLoaded && isSignedIn && clerkUser) {
         try {
           const { data } = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/v1/user/getuser`,
+            `${import.meta.env.VITE_BACKEND_URL || "http://localhost:4000"}/api/v1/user/getuser`,
             { withCredentials: true }
           );
           if (data.user && data.user.role) {
