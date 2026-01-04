@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { ClerkProvider, useUser, useAuth } from "@clerk/clerk-react";
 import axios from "axios";
 import RoleSelection from "./components/Auth/RoleSelection";
+import "./App.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const ADMIN_EMAIL = import.meta.env.VITE_ADMIN_EMAIL;
@@ -20,6 +21,7 @@ const AppWrapper = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [user, setUser] = useState({});
   const [showRoleSelection, setShowRoleSelection] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const { user: clerkUser, isLoaded } = useUser();
   const { isSignedIn } = useAuth();
@@ -71,17 +73,23 @@ const AppWrapper = () => {
             setShowRoleSelection(true);
           }
         } catch (error) {
-          // If not authorized or not found, show role selection
           setShowRoleSelection(true);
+        } finally {
+          setLoading(false);
         }
       } else if (isLoaded && !isSignedIn) {
         setIsAuthorized(false);
         setUser({});
         setShowRoleSelection(false);
+        setLoading(false);
       }
     };
     fetchUser();
   }, [isLoaded, isSignedIn, clerkUser]);
+
+  if (loading && !showRoleSelection && isSignedIn) {
+    return <div className="loading-screen"><h3>Loading User Profile...</h3></div>;
+  }
 
   return (
     <Context.Provider
