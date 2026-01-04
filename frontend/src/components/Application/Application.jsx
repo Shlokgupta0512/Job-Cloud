@@ -116,27 +116,26 @@ const Application = ({ jobId: propJobId }) => {
           />
         </div>
 
-        <div className="grid_inputs">
-          <div className="input_wrapper">
-            <MdPhone className="input_icon" />
-            <input
-              type="number"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input_wrapper">
-            <MdLocationCity className="input_icon" />
-            <input
-              type="text"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              required
-            />
-          </div>
+        <div className="input_wrapper">
+          <MdPhone className="input_icon" />
+          <input
+            type="number"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="input_wrapper">
+          <MdLocationCity className="input_icon" />
+          <input
+            type="text"
+            placeholder="Address (City, State)"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
         </div>
 
         <div className="input_wrapper textarea_wrapper">
