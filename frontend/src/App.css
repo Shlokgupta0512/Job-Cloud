@@ -1068,28 +1068,103 @@ footer .container {
   margin-top: 5px;
 }
 
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablet and Small Desktop (1024px and below) */
 @media (max-width: 1024px) {
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
   .heroSection .container {
     flex-direction: column;
     text-align: center;
+    gap: 30px;
   }
 
   .heroSection .title h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
+  }
+
+  .heroSection .title p {
+    max-width: 100%;
   }
 
   .heroSection .image img {
     max-height: 400px;
   }
+
+  .heroSection .details {
+    margin-top: 50px;
+  }
+
+  .jobPostPage .wrapper {
+    flex-direction: column;
+  }
+
+  .jobPostPage .ranged_salary {
+    flex-direction: column;
+  }
+
+  .grid_inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .job_detail_page .content_wrapper {
+    flex-direction: column;
+  }
+
+  .application_section {
+    position: static;
+  }
 }
 
+/* Mobile Devices (768px and below) */
 @media (max-width: 768px) {
+
+  /* Typography */
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  /* Navbar */
+  nav .container {
+    padding: 0 15px;
+  }
+
+  nav .logo h3 {
+    font-size: 1.4rem;
+  }
+
   nav .menu {
     display: none;
   }
 
   nav .hamburger {
     display: block;
+    font-size: 1.8rem;
   }
 
   .navbarShow .menu.show-menu {
@@ -1099,10 +1174,617 @@ footer .container {
     top: 100%;
     left: 0;
     width: 100%;
-    background: var(--primary);
+    background: #0f172a;
     padding: 20px;
+    gap: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+  }
+
+  .navbarShow .menu.show-menu li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown-container {
+    position: static;
+  }
+
+  .dropdown-menu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    margin-top: 10px;
+    min-width: 100%;
+  }
+
+  .dropdown-container:hover .dropdown-menu {
+    transform: none;
+  }
+
+  /* Hero Section */
+  .heroSection {
+    padding: 60px 0;
+  }
+
+  .heroSection .container {
+    padding: 0 15px;
+  }
+
+  .heroSection .title h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .heroSection .title p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+
+  .heroSection .image img {
+    max-height: 300px;
+  }
+
+  .heroSection .details {
+    margin-top: 40px;
+    gap: 20px;
+  }
+
+  .heroSection .card {
+    min-width: 100%;
+    padding: 20px 25px;
+  }
+
+  .heroSection .card .icon {
+    font-size: 1.8rem;
+  }
+
+  .heroSection .card .content p:first-child {
+    font-size: 1.2rem;
+  }
+
+  /* How It Works */
+  .howitworks {
+    padding: 60px 0;
+  }
+
+  .howitworks .container {
+    padding: 0 15px;
+  }
+
+  .howitworks h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .howitworks .banner {
+    gap: 20px;
+  }
+
+  .howitworks .card {
+    padding: 30px;
+    min-width: 100%;
+  }
+
+  /* Categories & Companies */
+  .categories,
+  .companies {
+    padding: 60px 0;
+  }
+
+  .categories .container,
+  .companies .container {
+    padding: 0 15px;
+  }
+
+  .categories h3,
+  .companies h3 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .categories .banner,
+  .companies .banner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Contact & About Pages */
+  .contactPage,
+  .aboutPage {
+    padding: 60px 0;
+  }
+
+  .contactPage .container,
+  .aboutPage .container {
+    padding: 40px 20px;
+  }
+
+  .contactPage h3,
+  .aboutPage h3 {
+    font-size: 2.2rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  /* Jobs Page */
+  .jobsHero {
+    height: 300px;
+  }
+
+  .jobsHero h1 {
+    font-size: 2.5rem;
+  }
+
+  .jobsHero p {
+    font-size: 1.1rem;
+  }
+
+  .jobsPage .container {
+    padding: 0 15px;
+  }
+
+  .jobsPage .sectionTitle {
+    font-size: 2rem;
+    margin: 40px 0 30px;
+  }
+
+  .jobsPage .banner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .jobsPage .card {
+    padding: 25px;
+  }
+
+  /* Job Post Page */
+  .jobPostPage {
+    padding: 30px 15px;
+    padding-top: 80px;
+  }
+
+  .jobPostPage .header h3 {
+    font-size: 2rem;
+  }
+
+  .jobPostPage form {
+    padding: 30px 20px;
+  }
+
+  /* Job Detail Page */
+  .job_detail_page .page_hero {
+    height: 250px;
+  }
+
+  .job_detail_page h1 {
+    font-size: 2.2rem;
+  }
+
+  .job_detail_page .container {
+    padding: 0 15px;
+  }
+
+  .info_grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .premium_application_form {
+    padding: 25px;
+  }
+
+  .premium_application_form h3 {
+    font-size: 1.5rem;
+  }
+
+  /* My Applications Page */
+  .my_applications_page .page_hero {
+    height: 250px;
+  }
+
+  .my_applications_page h1 {
+    font-size: 2.5rem;
+  }
+
+  .my_applications_page .container {
+    padding: 0 15px;
+  }
+
+  .cards_grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .application_card {
+    padding: 25px;
+  }
+
+  /* My Jobs Page */
+  .my_jobs_page .page_hero {
+    height: 250px;
+  }
+
+  .my_jobs_page h1 {
+    font-size: 2.5rem;
+  }
+
+  .my_jobs_page .hero_icon {
+    font-size: 3rem;
+  }
+
+  .my_jobs_page .container {
+    padding: 0 15px;
+  }
+
+  .jobs_grid {
+    gap: 25px;
+  }
+
+  .job_card {
+    padding: 25px;
+  }
+
+  .grid_fields {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Role Selection */
+  .role-selection-container {
+    padding: 35px 20px;
+    width: 95%;
+  }
+
+  .role-selection-container h2 {
+    font-size: 2rem;
+  }
+
+  .roles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .role-card {
+    padding: 30px 25px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 30px 0;
+  }
+
+  footer .container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 15px;
   }
 }
+
+/* Small Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+
+  /* Typography */
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  /* Navbar */
+  nav .logo h3 {
+    font-size: 1.2rem;
+  }
+
+  nav .hamburger {
+    font-size: 1.5rem;
+  }
+
+  /* Hero Section */
+  .heroSection {
+    padding: 40px 0;
+  }
+
+  .heroSection .title h1 {
+    font-size: 2rem;
+  }
+
+  .heroSection .title p {
+    font-size: 1rem;
+  }
+
+  .heroSection .image img {
+    max-height: 250px;
+  }
+
+  .heroSection .card {
+    padding: 15px 20px;
+    min-width: 100%;
+  }
+
+  .heroSection .card .icon {
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+
+  .heroSection .card .content p:first-child {
+    font-size: 1.1rem;
+  }
+
+  .heroSection .card .content p:last-child {
+    font-size: 0.9rem;
+  }
+
+  /* How It Works */
+  .howitworks {
+    padding: 40px 0;
+  }
+
+  .howitworks h3 {
+    font-size: 1.8rem;
+  }
+
+  .howitworks .card {
+    padding: 25px;
+  }
+
+  .howitworks .card .icon {
+    font-size: 2.5rem;
+    padding: 15px;
+  }
+
+  .howitworks .card p:first-of-type {
+    font-size: 1.2rem;
+  }
+
+  /* Categories & Companies */
+  .categories,
+  .companies {
+    padding: 40px 0;
+  }
+
+  .categories h3,
+  .companies h3 {
+    font-size: 1.8rem;
+  }
+
+  .categories .card,
+  .companies .card {
+    padding: 20px;
+  }
+
+  /* Contact & About Pages */
+  .contactPage,
+  .aboutPage {
+    padding: 40px 0;
+  }
+
+  .contactPage .container,
+  .aboutPage .container {
+    padding: 30px 15px;
+  }
+
+  .contactPage h3,
+  .aboutPage h3 {
+    font-size: 1.8rem;
+  }
+
+  .contactPage p,
+  .aboutPage p {
+    font-size: 1rem;
+  }
+
+  /* Jobs Page */
+  .jobsHero {
+    height: 250px;
+  }
+
+  .jobsHero h1 {
+    font-size: 2rem;
+  }
+
+  .jobsHero p {
+    font-size: 1rem;
+  }
+
+  .jobsPage .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .jobsPage .card {
+    padding: 20px;
+  }
+
+  .jobsPage .card .title {
+    font-size: 1.2rem;
+  }
+
+  /* Job Post Page */
+  .jobPostPage {
+    padding: 20px 10px;
+    padding-top: 70px;
+  }
+
+  .jobPostPage .header h3 {
+    font-size: 1.8rem;
+  }
+
+  .jobPostPage form {
+    padding: 25px 15px;
+  }
+
+  .jobPostPage input,
+  .jobPostPage select,
+  .jobPostPage textarea {
+    padding: 10px 15px;
+    font-size: 0.95rem;
+  }
+
+  .jobPostPage .submit-btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  /* Job Detail Page */
+  .job_detail_page .page_hero {
+    height: 200px;
+  }
+
+  .job_detail_page h1 {
+    font-size: 1.8rem;
+  }
+
+  .job_detail_page .hero_content p {
+    font-size: 1rem;
+  }
+
+  .premium_application_form {
+    padding: 20px;
+  }
+
+  .premium_application_form h3 {
+    font-size: 1.3rem;
+  }
+
+  .input_wrapper input,
+  .input_wrapper textarea {
+    padding: 10px 12px 10px 40px;
+    font-size: 0.95rem;
+  }
+
+  .submit_btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+
+  /* My Applications Page */
+  .my_applications_page .page_hero {
+    height: 200px;
+  }
+
+  .my_applications_page h1 {
+    font-size: 2rem;
+  }
+
+  .my_applications_page p {
+    font-size: 1rem;
+  }
+
+  .application_card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .user_info h3 {
+    font-size: 1.3rem;
+  }
+
+  /* My Jobs Page */
+  .my_jobs_page .page_hero {
+    height: 200px;
+  }
+
+  .my_jobs_page h1 {
+    font-size: 2rem;
+  }
+
+  .my_jobs_page .hero_icon {
+    font-size: 2.5rem;
+  }
+
+  .job_card {
+    padding: 20px;
+  }
+
+  .job_card .action_buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .job_card .action_buttons button {
+    width: 100%;
+  }
+
+  /* Role Selection */
+  .role-selection-container {
+    padding: 25px 15px;
+  }
+
+  .role-selection-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .role-selection-container p {
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+
+  .role-card {
+    padding: 25px 20px;
+  }
+
+  .role-icon {
+    font-size: 3rem;
+    padding: 15px;
+  }
+
+  .role-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .role-card p {
+    font-size: 0.9rem;
+  }
+
+  /* Buttons - Ensure touch-friendly sizes */
+  .nav-login-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+
+  button,
+  .submit-btn,
+  .login_btn,
+  .post_btn {
+    min-height: 44px;
+    /* iOS recommended touch target */
+  }
+
+  /* No Jobs Empty State */
+  .no_jobs {
+    padding: 60px 15px;
+  }
+
+  .empty_icon {
+    font-size: 3.5rem;
+  }
+
+  .no_jobs p {
+    font-size: 1.1rem;
+  }
+
+  .post_btn {
+    padding: 10px 25px;
+    font-size: 1rem;
+  }
+}
+
 
 /* My Applications Page Premium Styling */
 .my_applications_page {
