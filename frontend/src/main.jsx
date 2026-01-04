@@ -23,8 +23,7 @@ const AppWrapper = () => {
   const [showRoleSelection, setShowRoleSelection] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const { user: clerkUser, isLoaded } = useUser();
-  const { isSignedIn } = useAuth();
+  const { user: clerkUser, isLoaded, isSignedIn } = useUser();
 
   const syncUser = async (selectedRole) => {
     if (!clerkUser) return;
