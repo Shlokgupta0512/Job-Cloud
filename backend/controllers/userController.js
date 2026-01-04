@@ -59,6 +59,7 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 
 export const getUser = catchAsyncErrors((req, res, next) => {
   const user = req.user;
+  console.log(`Backend getUser: Fetching data for ${user?.email}, Role: ${user?.role}`);
   res.status(200).json({
     success: true,
     user,
@@ -73,12 +74,17 @@ export const clerkSync = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Determine role based on admin email (server-side authority)
-  const adminEmail = process.env.VITE_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+  const adminEmailFromEnv = process.env.VITE_ADMIN_EMAIL || process.env.ADMIN_EMAIL;
+  const hardcodedAdmin = "shlokg166@gmail.com";
   let finalRole = role;
 
-  if (email && adminEmail && email.toLowerCase().trim() === adminEmail.toLowerCase().trim()) {
+  // Force Employer role if email matches admin email
+  if (email && (
+    email.toLowerCase().trim() === hardcodedAdmin.toLowerCase() ||
+    (adminEmailFromEnv && email.toLowerCase().trim() === adminEmailFromEnv.toLowerCase().trim())
+  )) {
     finalRole = "Employer";
-    console.log(`Backend: Recognized admin email ${email}. Forcing Employer role.`);
+    console.log(`Backend: Recognized admin email ${email}. FORCING Employer role.`);
   }
 
   const user = await User.findOneAndUpdate(
